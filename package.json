@@ -1,0 +1,32 @@
+{
+  "name": "dumpproxies",
+  "version": "1.0.0",
+  "description": "Ethereum ERC20 proxy contracts project",
+  "main": "truffle-config.js",
+  "scripts": {
+    "test": "truffle test",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate",
+    "deploy": "truffle migrate --reset"
+  },
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "truffle",
+    "erc20",
+    "proxy"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.6",
+    "@openzeppelin/contracts-upgradeable": "^4.9.3",
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "@openzeppelin/truffle-upgrades": "^1.21.0",
+    "axios": "^1.7.9",
+    "decimal.js-light": "^2.5.1",
+    "ethers": "^6.13.5",
+    "form-data": "^4.0.1",
+    "web3": "^4.16.0"
+  }
+}

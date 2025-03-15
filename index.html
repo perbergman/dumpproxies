@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Admin Relationship Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .diagram {
+            width: 100%;
+            overflow: auto;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            font-family: monospace;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .info {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Proxy Admin Relationship Diagram</h1>
+        
+        <div class="info">
+            <p>This diagram shows the relationships between your proxy contracts, admin contracts, and implementation contracts.</p>
+            <p>Each color represents a different admin contract. The dashed line indicates the target implementation of each proxy.</p>
+        </div>
+        
+        <textarea id="mermaidCode" placeholder="Paste your Mermaid diagram code here..."></textarea>
+        <button class="button" onclick="renderDiagram()">Render Diagram</button>
+        
+        <div id="diagram" class="diagram">
+            <!-- Mermaid diagram will be rendered here -->
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            logLevel: 3,
+            securityLevel: 'loose',
+            flowchart: { 
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Function to render the diagram
+        function renderDiagram() {
+            const code = document.getElementById('mermaidCode').value;
+            if (!code) {
+                alert('Please paste the Mermaid diagram code first!');
+                return;
+            }
+            
+            const element = document.getElementById('diagram');
+            element.innerHTML = '';  // Clear previous diagram
+            
+            try {
+                // Create a unique ID for the diagram
+                const diagramId = 'mermaid-diagram';
+                element.innerHTML = `<div class="mermaid" id="${diagramId}">${code}</div>`;
+                
+                // Render the diagram
+                mermaid.init(undefined, `#${diagramId}`);
+            } catch (error) {
+                element.innerHTML = `<p style="color: red;">Error rendering diagram: ${error.message}</p>`;
+                console.error('Mermaid error:', error);
+            }
+        }
+
+        // Try to load diagram code from file if available
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('code')) {
+                document.getElementById('mermaidCode').value = decodeURIComponent(urlParams.get('code'));
+                renderDiagram();
+            }
+        };
+    </script>
+</body>
+</html>
