@@ -106,10 +106,10 @@ module.exports = async function(callback) {
       }
     }
     
-    // Generate Mermaid diagram
+    // Generate Mermaid diagram with correct syntax
     let mermaidCode = 'graph TD\n';
     
-    // Add nodes for admins
+    // Add nodes for admins with the correct syntax
     for (const [adminAddress, info] of Object.entries(data.admins)) {
       const shortAddr = adminAddress.substring(0, 6) + '...' + adminAddress.substring(38);
       const color = adminColors[adminAddress] || "#999999";
@@ -120,8 +120,9 @@ module.exports = async function(callback) {
         ? `Admin ${shortAddr}\\nMain Admin\\n(${proxiesCount} proxies)`
         : `Admin ${shortAddr}\\n(${proxiesCount} proxies)`;
       
-      mermaidCode += `    Admin_${adminAddress.substring(2, 8)} ["${label}"]`;
-      mermaidCode += ` style Admin_${adminAddress.substring(2, 8)} fill:${color},stroke:#333,stroke-width:2px`;
+      // Node definition and styling on separate lines
+      mermaidCode += `    Admin_${adminAddress.substring(2, 8)}["${label}"]\n`;
+      mermaidCode += `    style Admin_${adminAddress.substring(2, 8)} fill:${color},stroke:#333,stroke-width:2px`;
       
       if (isMainAdmin) {
         mermaidCode += `,stroke-dasharray: 5 5`;
@@ -171,9 +172,10 @@ module.exports = async function(callback) {
       mermaidCode += `    Proxy_${proxyAddress.substring(2, 8)} -.-> Impl_${implAddr.substring(2, 8)}\n`;
     }
     
-    // Add legend
+    // Add legend with the correct format
     mermaidCode += `    subgraph Legend\n`;
-    mermaidCode += `        LegendAdmin["Admin Contract"] --> LegendProxy["Proxy Contract"]\n`;
+    mermaidCode += `        LegendAdmin["Admin Contract"]\n`;
+    mermaidCode += `        LegendProxy["Proxy Contract"]\n`;
     mermaidCode += `        LegendProxy -.-> LegendImpl["Implementation Contract"]\n`;
     mermaidCode += `    end\n`;
     
