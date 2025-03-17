@@ -1,0 +1,23 @@
+graph TD
+    Admin_186ace["Admin 0x186a...7c4d\nERRONEOUS Admin\n(1 proxies)"]
+    style Admin_186ace fill:#d62728,stroke:#333,stroke-width:2px
+    Admin_d8cb33["Admin 0xd8cb...1c4c\nERRONEOUS Admin\n(1 proxies)"]
+    style Admin_d8cb33 fill:#d62728,stroke:#333,stroke-width:2px
+    Proxy_bc7cae["ERC20 Proxy 0xbc7c...af84"] --> Admin_186ace
+    style Proxy_bc7cae fill:#d62728,stroke:#333,stroke-width:1px
+    Impl_cbf507["Implementation 0xcbf5...21c6"]
+    style Impl_cbf507 fill:#f9f9f9,stroke:#666,stroke-width:1px
+    Proxy_bc7cae -.-> Impl_cbf507
+    Proxy_3cbaae["ERC20 Proxy 0x3cba...de9e"] --> Admin_d8cb33
+    style Proxy_3cbaae fill:#d62728,stroke:#333,stroke-width:1px
+    Proxy_3cbaae -.-> Impl_cbf507
+    subgraph Legend
+        LegendCorrectAdmin["Correct Admin Contract"]
+        style LegendCorrectAdmin fill:#2ca02c,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+        LegendErrAdmin["Erroneous Admin Contract"]
+        style LegendErrAdmin fill:#d62728,stroke:#333,stroke-width:2px
+        LegendMismatchProxy["Proxy with Admin Mismatch"]
+        style LegendMismatchProxy fill:#ff7f0e,stroke:#333,stroke-width:2px,stroke-dasharray: 3 3
+        LegendProxy["Proxy Contract"]
+        LegendProxy -.-> LegendImpl["Implementation Contract"]
+    end

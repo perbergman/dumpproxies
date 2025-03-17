@@ -1,0 +1,68 @@
+Using network 'development'.
+
+Using deployer account: 0x604D770D2b9688c1f4a32EaD64F95486391C15E6
+Network ID: 5777
+
+=====================================================
+STEP 1: CREATE INITIAL DEPLOYMENT WITH FIRST PROXYADMIN
+=====================================================
+Deploying first ProxyAdmin...
+First ProxyAdmin deployed at: 0x5479273deF17B61dd63b0517e082aa12541dE553
+Deploying ERC20 implementation...
+ERC20 implementation deployed at: 0xC673836C0883A65498FCf6768F0D57Bd032A3B46
+Deploying first proxy with first ProxyAdmin...
+First proxy deployed at: 0x810f6B71EfF617ad4b20ff08c578564e70F48B66
+First deployment info saved to /Users/perjbergman/Documents/dev/dumpproxies/.openzeppelin/first-network-5777.json
+First proxy admin (from storage): 0x5479273def17b61dd63b0517e082aa12541de553
+First ProxyAdmin address: 0x5479273def17b61dd63b0517e082aa12541de553
+Admin verification: PASSED ✅
+
+=====================================================
+STEP 2: CREATE SECOND PROXYADMIN
+=====================================================
+Deploying second ProxyAdmin...
+Second ProxyAdmin deployed at: 0x1020Aa678ddA9a16d482E9FF9d7Fa972B01D00bf
+
+=====================================================
+STEP 3: IMPORT FIRST DEPLOYMENT AND GET WARNING
+=====================================================
+Deploying second proxy with second ProxyAdmin...
+Second proxy deployed at: 0x1a64B8DEA6d1cbB47961e2f3b96588ee13dED561
+Second deployment info saved to /Users/perjbergman/Documents/dev/dumpproxies/.openzeppelin/unknown-5777.json
+
+SIMULATED WARNING:
+Warning: Imported proxy with admin at '0x5479273deF17B61dd63b0517e082aa12541dE553' which differs from previously deployed admin '0x1020Aa678ddA9a16d482E9FF9d7Fa972B01D00bf'
+   The imported proxy admin is different from the proxy admin that was previously deployed on this network.
+   This proxy will not be upgradable directly by the plugin.
+   To upgrade this proxy, use the prepareUpgrade function and then upgrade it using the admin at '0x5479273deF17B61dd63b0517e082aa12541dE553'.
+
+Verifying current admin setup:
+First proxy (0x810f6B71EfF617ad4b20ff08c578564e70F48B66) admin: 0x5479273def17b61dd63b0517e082aa12541de553
+Second proxy (0x1a64B8DEA6d1cbB47961e2f3b96588ee13dED561) admin: 0x1020aa678dda9a16d482e9ff9d7fa972b01d00bf
+
+=====================================================
+STEP 4: SKIP ADMIN CHANGE - LEAVING ERRONEOUS CONFIGURATION
+=====================================================
+NOT changing admin of first proxy. Keeping it at: 0x5479273def17b61dd63b0517e082aa12541de553
+Second ProxyAdmin address: 0x1020aa678dda9a16d482e9ff9d7fa972b01d00bf
+Admin verification: FAILED ❌
+
+=====================================================
+STEP 5: VERIFY STATE IS CORRECTLY PRESERVED
+=====================================================
+Token state verification:
+Name: FirstToken
+Symbol: FT1
+State verification: PASSED ✅
+
+Testing functionality by minting tokens...
+Token balance after mint: 1000
+Functionality verification: PASSED ✅
+
+Implementation address via first admin: 0xC673836C0883A65498FCf6768F0D57Bd032A3B46
+Original implementation: 0xC673836C0883A65498FCf6768F0D57Bd032A3B46
+Implementation verification: PASSED ✅
+
+⚠️ The admin was NOT changed, showing an erroneous configuration!
+⚠️ The OpenZeppelin plugin thinks secondProxyAdmin manages firstProxy
+⚠️ But in reality, firstProxyAdmin is still the actual admin

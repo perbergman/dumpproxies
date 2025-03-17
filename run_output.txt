@@ -1,0 +1,68 @@
+Using network 'development'.
+
+Using deployer account: 0x604D770D2b9688c1f4a32EaD64F95486391C15E6
+Network ID: 5777
+
+=====================================================
+STEP 1: CREATE INITIAL DEPLOYMENT WITH FIRST PROXYADMIN
+=====================================================
+Deploying first ProxyAdmin...
+First ProxyAdmin deployed at: 0x3FeE4D45E27eEEae96f512Be046Be01149bffd84
+Deploying ERC20 implementation...
+ERC20 implementation deployed at: 0xe66338A62a385B9583cC3B2452f2BEa90af1a36a
+Deploying first proxy with first ProxyAdmin...
+First proxy deployed at: 0xa7Bd6941E4d86DA55323743757452489F98B7d33
+First deployment info saved to /Users/perjbergman/Documents/dev/dumpproxies/.openzeppelin/first-network-5777.json
+First proxy admin (from storage): 0x3fee4d45e27eeeae96f512be046be01149bffd84
+First ProxyAdmin address: 0x3fee4d45e27eeeae96f512be046be01149bffd84
+Admin verification: PASSED ✅
+
+=====================================================
+STEP 2: CREATE SECOND PROXYADMIN
+=====================================================
+Deploying second ProxyAdmin...
+Second ProxyAdmin deployed at: 0xcc5b2b1442cd743bAd61f53aeF0B19Dfba54A68e
+
+=====================================================
+STEP 3: IMPORT FIRST DEPLOYMENT AND GET WARNING
+=====================================================
+Deploying second proxy with second ProxyAdmin...
+Second proxy deployed at: 0x17EdBD41Fc250fbA1589f4039EbF8947a72A43B3
+Second deployment info saved to /Users/perjbergman/Documents/dev/dumpproxies/.openzeppelin/unknown-5777.json
+
+SIMULATED WARNING:
+Warning: Imported proxy with admin at '0x3FeE4D45E27eEEae96f512Be046Be01149bffd84' which differs from previously deployed admin '0xcc5b2b1442cd743bAd61f53aeF0B19Dfba54A68e'
+   The imported proxy admin is different from the proxy admin that was previously deployed on this network.
+   This proxy will not be upgradable directly by the plugin.
+   To upgrade this proxy, use the prepareUpgrade function and then upgrade it using the admin at '0x3FeE4D45E27eEEae96f512Be046Be01149bffd84'.
+
+Verifying current admin setup:
+First proxy (0xa7Bd6941E4d86DA55323743757452489F98B7d33) admin: 0x3fee4d45e27eeeae96f512be046be01149bffd84
+Second proxy (0x17EdBD41Fc250fbA1589f4039EbF8947a72A43B3) admin: 0xcc5b2b1442cd743bad61f53aef0b19dfba54a68e
+
+=====================================================
+STEP 4: CHANGE TRANSPARENTUPGRADEABLEPROXY TO THE SECOND PROXYADMIN
+=====================================================
+Changing admin of first proxy from 0x3fee4d45e27eeeae96f512be046be01149bffd84 to 0xcc5b2b1442cd743bad61f53aef0b19dfba54a68e...
+New first proxy admin (from storage): 0xcc5b2b1442cd743bad61f53aef0b19dfba54a68e
+Second ProxyAdmin address: 0xcc5b2b1442cd743bad61f53aef0b19dfba54a68e
+Admin change verification: PASSED ✅
+
+=====================================================
+STEP 5: VERIFY STATE IS CORRECTLY PRESERVED
+=====================================================
+Token state verification:
+Name: FirstToken
+Symbol: FT1
+State verification: PASSED ✅
+
+Testing functionality by minting tokens...
+Token balance after mint: 1000
+Functionality verification: PASSED ✅
+
+Implementation address via second admin: 0xe66338A62a385B9583cC3B2452f2BEa90af1a36a
+Original implementation: 0xe66338A62a385B9583cC3B2452f2BEa90af1a36a
+Implementation verification: PASSED ✅
+
+🎉 The admin change was successful and all state was preserved!
+✅ The second ProxyAdmin can now manage the first proxy as well
